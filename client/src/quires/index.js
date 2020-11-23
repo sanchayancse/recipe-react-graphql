@@ -4,6 +4,8 @@ export const GET_ALL_RECIPES = gql`
 
 query{
     getAllRecipies{
+        _id
+
         name
 
         description
@@ -19,6 +21,91 @@ query{
 }
 
 `;
+
+export const GET_RECIPE = gql`
+
+query($_id:ID!){
+  getRecipe(_id: $_id){
+    _id
+    name
+    category
+    description
+    instructions
+    likes
+    createdDate
+    
+  }
+}
+
+`;
+
+
+export const LIKE_RECIPE = gql`
+
+mutation($_id: ID!, $username: String!){
+  likeRecipe(_id: $_id, username: $username){
+
+    _id
+    likes
+
+  }
+}
+`;
+
+
+export const UNLIKE_RECIPE = gql`
+
+mutation($_id: ID!, $username: String!){
+  unlikeRecipe(_id: $_id, username: $username){
+
+    _id
+    likes
+
+  }
+}
+`;
+
+
+
+export const SEARCH_RECIPES = gql`
+ 
+ query($searchTerm: String){
+   searchRecipes(searchTerm: $searchTerm){
+    _id
+    name
+    likes
+
+   }
+ }
+
+`
+
+
+
+
+
+//Recipes Mutation 
+
+export const ADD_RECIPE = gql`
+
+mutation($name: String!, $description: String!, $category: String!, $instructions: String!, $username: String! 
+
+
+){
+  addRecipe(name:$name, description:$description, instructions:$instructions, category:$category, username:$username  ){
+    _id
+    name
+    description
+    instructions
+    category
+    likes
+    createdDate
+
+
+  }
+}
+
+`
 
 
 // USER QUIRES

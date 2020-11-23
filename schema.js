@@ -25,7 +25,11 @@ type User{
 type Query {
     getAllRecipies:[Recipe]
 
-    getCurrentUser: User
+    getRecipe(_id: ID!): Recipe
+
+    getCurrentUser: User 
+
+    searchRecipes(searchTerm: String): [Recipe]    
 }
 
 type Token{
@@ -40,5 +44,10 @@ type Mutation{
         signinUser(username: String!, password: String!): Token
 
         signupUser(username: String!, email:String!, password:String!): Token
+
+        likeRecipe(_id:ID!, username: String!): Recipe
+
+        unlikeRecipe(_id:ID!, username: String!): Recipe
+
 }
 `;

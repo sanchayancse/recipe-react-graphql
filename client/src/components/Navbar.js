@@ -1,14 +1,16 @@
 import React from 'react'
 import {Link, NavLink} from 'react-router-dom'
+import Signout from './Auth/Signout'
 
-const Navbar = () =>(
+const Navbar = ({session}) =>(
 
 <nav>
-    <NavbarAuth/>
+    {session && session.getCurrentUser ?<NavbarAuth session={session}/> : <NavbarUnAuth/>}
 </nav>
 )
 
-const NavbarAuth = ()=>(
+const NavbarAuth = ({ session})=>(
+    <>
     <ul>
         <li>
             <NavLink to="/" exact>Home</NavLink>
@@ -20,7 +22,7 @@ const NavbarAuth = ()=>(
 
         
         <li>
-            <NavLink to="/recepe/add">Add Recipe</NavLink>
+            <NavLink to="/recipe/add">Add Recipe</NavLink>
         </li>
 
 
@@ -29,9 +31,13 @@ const NavbarAuth = ()=>(
         </li>
 
         <li>
-            <button>Signout</button>
+            <Signout/>
         </li>
     </ul>
+
+<h2>Welcome ,{session.getCurrentUser.username}</h2>
+   </>
+
 )
 
 
